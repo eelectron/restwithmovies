@@ -4,24 +4,29 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Movie {	
-	private String Title;
-	private Integer Year;
+public class Movie {
+	
+	@JsonProperty("Title")
+	private String title;
+	
+	@JsonProperty("Year")
+	private Integer year;
+	
 	private String imdbID;
-
 	public String getTitle() {
-		return Title;
+		return title;
 	}
 	public void setTitle(String title) {
-		Title = title;
+		this.title = title;
 	}
 	public Integer getYear() {
-		return Year;
+		return year;
 	}
 	public void setYear(Integer year) {
-		Year = year;
+		this.year = year;
 	}
 	public String getImdbID() {
 		return imdbID;
@@ -31,6 +36,8 @@ public class Movie {
 	}
 	@Override
 	public String toString() {
-		return "Movie [Title=" + Title + ", Year=" + Year + ", imdbID=" + imdbID + "]";
+		return "Movie [title=" + title + ", year=" + year + ", imdbID=" + imdbID + "]";
 	}
+
+	
 }
