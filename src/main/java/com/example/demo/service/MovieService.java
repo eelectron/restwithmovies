@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import com.example.demo.model.Catalogue;
 import com.example.demo.model.Movie;
 import com.example.demo.repository.MovieRepository;
 
@@ -15,16 +13,6 @@ public class MovieService implements MovieServiceInf{
 	@Autowired
 	private MovieRepository movieRepo;
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	private String url = "https://jsonmock.hackerrank.com/api/movies/search/?Title=spiderman&page=1";
-	
-	public List<Movie> getMoviesFromHackerrank() {
-		// TODO Auto-generated method stub
-		Catalogue moviesCata = restTemplate.getForObject(url, Catalogue.class);
-		return moviesCata.getData();
-	}
-
 	@Override
 	public Movie createMovie(Movie movie) {
 		// TODO Auto-generated method stub
@@ -33,30 +21,16 @@ public class MovieService implements MovieServiceInf{
 	}
 
 	@Override
-	public Movie getMovie(long id) {
+	public Movie getMovie(Long id) {
 		// TODO Auto-generated method stub
-		System.out.println("id = " + id);
-		Movie movie = new Movie("none", -1, "none");
-		System.out.println(movie);
-		try {
-			movie = movieRepo.getById(id);
-			return movie;
-		}catch(Exception exp) {
-			System.out.println("Movie not found id = " + id);
-			return movie;
-		}
+		return movieRepo.getById(id);
 	}
 
 	@Override
-	public Movie deleteMovie(long id) {
+	public Movie deleteMovie(Long id) {
 		// TODO Auto-generated method stub
-		Movie movie = new Movie("none", -1, "none"); 
-		try {
-			movie = movieRepo.getById(id);
-			movieRepo.delete(movie);
-		}catch(Exception exp){
-			System.out.print("Movie not found id = " + id);
-		}
+		Movie movie = movieRepo.getById(id);
+		movieRepo.delete(movie);
 		return movie;
 	}
 

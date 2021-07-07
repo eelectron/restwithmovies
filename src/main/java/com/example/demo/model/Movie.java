@@ -1,23 +1,20 @@
 package com.example.demo.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
-	/*@Id
-	private long id;
-	*/
-	@JsonProperty("Title")
+	@Id
+	@GeneratedValue
+	private Long movieId;
+	
 	private String title;
-	
-	@JsonProperty("Year")
 	private Integer year;
-	
 	private String imdbID;
 	
 	public Movie() {
@@ -25,13 +22,22 @@ public class Movie {
 	}
 
 	
-	public Movie(String title, Integer year, String imdbID) {
+	public Movie(Long movieId, String title, Integer year, String imdbID) {
 		super();
+		this.movieId = movieId;
 		this.title = title;
 		this.year = year;
 		this.imdbID = imdbID;
 	}
 
+
+	public Long getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(Long movieId) {
+		this.movieId = movieId;
+	}
 
 	public String getTitle() {
 		return title;
@@ -59,6 +65,6 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		return "Movie [title=" + title + ", year=" + year + ", imdbID=" + imdbID + "]";
+		return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", imdbID=" + imdbID + "]";
 	}
 }

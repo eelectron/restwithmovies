@@ -15,48 +15,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import com.example.demo.model.Catalogue;
 import com.example.demo.model.Movie;
 import com.example.demo.service.MovieService;
 
 @RestController
-public class ApiController {
+public class MovieController {
 	@Autowired
 	private MovieService movieService;
-	
-	/*
-	 * Get all movies
-	 * */
-	@GetMapping("/moviesFromHackerrank")
-	public List<Movie> getMoviesFromHackerrank(){
-		//Catalogue moviesCata = restTemplate.getForObject(url, Catalogue.class);
-		return this.movieService.getMoviesFromHackerrank();
-	}
-	
-	/*
-	 * Get all movies sorted in ascending or descending order
-	 * based on request parameter
-	 */
-	 @GetMapping("/movies/sort")
-	 public List<Movie> getMoviesInOrder(@RequestParam("sortOrder")String sortOrder){
-		 List<Movie> movies = new ArrayList<>(this.movieService.getMoviesFromHackerrank());
-		 System.out.print(sortOrder);
-		 if(sortOrder.equals("ascending")) {
-			 System.out.print(movies	);
-			 Collections.sort(movies, (m1, m2) -> m1.getYear() - m2.getYear());
-			 return movies;
-		 }
-		 else {
-			 Collections.sort(movies, (m1, m2) -> m2.getYear() - m1.getYear());
-			 return movies;
-		 }
-	 }
 	
 	 
 	 @PostMapping("/movies")
 	 public Movie createMovie(@RequestBody Movie movie) {
-		 return this.movieService.createMovie(movie);
+		 return movieService.createMovie(movie);
 	 }
 	 
 	 @GetMapping("/movies")
@@ -65,10 +35,8 @@ public class ApiController {
 	 }
 	 
 	 @GetMapping("/movies/{id}")
-	 public Movie getMovie(@PathVariable String id) {
-		 long idAsLong = Long.parseLong(id);
-		 System.out.println(idAsLong);
-		 return movieService.getMovie(idAsLong);
+	 public Movie getMovie(@PathVariable Long id) {
+		 return movieService.getMovie(id);
 	 }
 	 
 	 @PutMapping("/movies")
@@ -78,7 +46,7 @@ public class ApiController {
 	 
 	 
 	 @DeleteMapping("/movies/{id}")
-	 public Movie deleteMovie(@PathVariable("id") long id) {
+	 public Movie deleteMovie(@PathVariable("id") Long id) {
 		 Movie movie = movieService.deleteMovie(id);
 		 return movie;
 	 }
