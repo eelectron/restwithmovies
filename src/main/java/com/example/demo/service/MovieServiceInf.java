@@ -9,6 +9,7 @@ import com.example.demo.model.Movie;
 
 public interface MovieServiceInf{
 	public List<Movie> getMovies();
+	public List<Movie> getMovies(String movieName);
 	public Movie createMovie(Movie movie);
 	public Optional<Movie> getMovie(Long id);
 	public Optional<Movie> deleteMovie(Long id);

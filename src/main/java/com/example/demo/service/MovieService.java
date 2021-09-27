@@ -53,4 +53,10 @@ public class MovieService implements MovieServiceInf{
 		// TODO Auto-generated method stub
 		return movieRepo.findAll();
 	}
+
+	@Override
+	public List<Movie> getMovies(String movieName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

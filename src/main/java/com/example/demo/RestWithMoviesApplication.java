@@ -10,4 +10,9 @@ public class RestWithMoviesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestWithMoviesApplication.class, args);
 	}
+	
+	@Bean
+   public RestTemplate getRestTemplate() {
+      return new RestTemplate();
+   }
 }

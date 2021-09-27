@@ -19,6 +19,9 @@ import org.springframework.web.client.RestTemplate;
 import com.example.demo.model.Movie;
 import com.example.demo.service.MovieService;
 
+/*
+ * This controller interact with movie database .
+ * */
 @RestController
 public class MovieController {
 	@Autowired
